@@ -1,14 +1,30 @@
 " bpm.vim - scroll and sing along
 
 " don't load twice
-" if exists("g:loaded_bpm") || &cp || v:version < 700
-"   finish
-" endif
-" let g:loaded_bpm = 1
+if exists("g:loaded_bpm") || &cp || v:version < 700
+  finish
+endif
+let g:loaded_bpm = 1
 
 let g:is_running = 0
 let g:interval = 300
 let g:direction = ""
+
+function! ScrollUpOnce()
+  normal! k
+endfunction
+
+function! ScrollDownOnce()
+  normal! j
+endfunction
+
+function! ScrollRightOnce()
+  normal! zl
+endfunction
+
+function! ScrollLeftOnce()
+  normal! zh
+endfunction
 
 function! InvokeBpmUp()
   if g:is_running
@@ -24,7 +40,7 @@ function! InvokeBpmUp()
   if l:bpm != ""
     let g:interval = l:bpm
   endif
-  let g:timer_id = timer_start(g:interval, { id -> execute("normal! k") }, { 'repeat': -1 })
+  let g:timer_id = timer_start(g:interval, { id -> ScrollUpOnce() }, { 'repeat': -1 })
   let g:is_running = 1
   let g:direction = "up"
 endfunction
@@ -43,7 +59,7 @@ function! InvokeBpmDown()
   if l:bpm != ""
     let g:interval = l:bpm
   endif
-  let g:timer_id = timer_start(g:interval, { id -> execute("normal! j") }, { 'repeat': -1 })
+  let g:timer_id = timer_start(g:interval, { id -> ScrollDownOnce() }, { 'repeat': -1 })
   let g:is_running = 1
   let g:direction = "down"
 endfunction
@@ -62,7 +78,7 @@ function! InvokeBpmRight()
   if l:bpm != ""
     let g:interval = l:bpm
   endif
-  let g:timer_id = timer_start(g:interval, { id -> execute("normal! zl") }, { 'repeat': -1 })
+  let g:timer_id = timer_start(g:interval, { id -> ScrollRightOnce() }, { 'repeat': -1 })
   let g:is_running = 1
   let g:direction = "right"
 endfunction
@@ -81,17 +97,18 @@ function! InvokeBpmLeft()
   if l:bpm != ""
     let g:interval = l:bpm
   endif
-  let g:timer_id = timer_start(g:interval, { id -> execute("normal! zh") }, { 'repeat': -1 })
+  let g:timer_id = timer_start(g:interval, { id -> ScrollLeftOnce() }, { 'repeat': -1 })
   let g:is_running = 1
   let g:direction = "left"
 endfunction
 
-command! -bang Bpm
-    \ :call InvokeBpm(<args>)
+" scroll once
+nnoremap <C-Up> :call ScrollUpOnce()<CR>
+nnoremap <C-Down> :call ScrollDownOnce()<CR>
+nnoremap <C-Right> :call ScrollRightOnce()<CR>
+nnoremap <C-Left> :call ScrollLeftOnce()<CR>
 
-command! -bang Bpmh
-    \ :call InvokeBpmH(<args>)
-
+" scroll continuously
 nnoremap <leader><C-Up> :call InvokeBpmUp()<CR>
 nnoremap <leader><C-Down> :call InvokeBpmDown()<CR>
 nnoremap <leader><C-Right> :call InvokeBpmRight()<CR>
