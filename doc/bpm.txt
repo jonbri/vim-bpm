@@ -1,0 +1,42 @@
+*bpm.txt* Scrolling plugin
+
+Author:  Jonathan Brink
+License: Same terms as Vim itself (see |license|)
+
+INTRODUCTION                                    *bpm*
+
+Mappings for auto-scrolling.
+
+                                                *<C-UP>
+<C-UP> Vertically scroll upwards by one line
+
+                                                *<C-DOWN>
+<C-DOWN> Vertically scroll downwards by one line
+
+                                                *<C-RIGHT>
+<C-RIGHT> Horizontally scroll right by one line
+
+                                                *<C-LEFT>
+<C-LEFT> Horizontally scroll left by one line
+
+                                                *<leader>-<C-UP>
+<leader><C-UP> Continuously vertically scroll upwards
+
+                                                *<leader>-<C-DOWN>
+<leader><C-DOWN> Continuously vertically scroll downwards
+
+                                                *<leader>-<C-RIGHT>
+<leader><C-RIGHT> Continuously horizontally scroll rightwards
+
+                                                *<leader>-<C-LEFT>
+<leader><C-LEFT> Continuously horizontally scroll leftwards
+
+
+
+ABOUT                                           *bpm-about*
+
+Grab the latest version or report a bug on GitHub:
+
+https://github.com/jonbri/vim-bpm
+
+ vim:tw=78:et:ft=help:norl:
